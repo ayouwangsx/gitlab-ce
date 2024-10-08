@@ -46,12 +46,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.DOCKER_NAMESPACE }}  # 使用 DOCKER_NAMESPACE 环境变量
-          flavor: |
-            latest=${{ env.IS_LATEST }}
           tags: |
-            type=ref,event=tag
-            type=match,pattern=(.*\..*)\..*-ce\..*,group=1
-            type=match,pattern=(.*)\..*\..*-ce\..*,group=1
+            type=match,pattern=(.*\..*)\..*-ce\..*,group=0
       
       - name: Check out https://github.com/gitlabhq/omnibus-gitlab.git
         uses: actions/checkout@v4
