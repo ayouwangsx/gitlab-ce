@@ -28,18 +28,18 @@ jobs:
           echo "GITLAB_DIR=omnibus-gitlab" >> $GITHUB_ENV
           echo "DOCKER_DIR=omnibus-gitlab/docker" >> $GITHUB_ENV
           echo "GITLAB_REF_TAG=$(echo ${{ github.ref_name }} | sed 's/\-/\+/')" >> $GITHUB_ENV
-          DOCKER_NAMESPACE=yrzr/gitlab-ce
+          echo "DOCKER_NAMESPACE=yrzr/gitlab-ce" >> $GITHUB_ENV  # 将 DOCKER_NAMESPACE 写入到环境变量中
           LATEST=$(git tag | sort -rV | head -n 1)
           if [ "${LATEST}" == "${{ github.ref_name }}" ]; then 
-            echo "IS_LATEST=true">> $GITHUB_ENV
+            echo "IS_LATEST=true" >> $GITHUB_ENV
           else
-            echo "IS_LATEST=false">> $GITHUB_ENV
+            echo "IS_LATEST=false" >> $GITHUB_ENV
           fi
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: $DOCKER_NAMESPACE
+          images: ${{ env.DOCKER_NAMESPACE }}  # 这里需要引用环境变量
           flavor: |
             latest=${{ env.IS_LATEST }}
           tags: |
@@ -69,7 +69,4 @@ jobs:
           context: ${{ env.DOCKER_DIR }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          manifest: |
-            linux/amd64=${{ steps.meta.outputs.tags }}-amd64
-            linux/arm64=${{ steps.meta.outputs.tags }}-arm64
+          tags: ${{ steps.meta.outputs.tags }}  # 使用元数据步骤生成的标签
