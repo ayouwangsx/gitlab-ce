@@ -24,8 +24,10 @@ jobs:
         shell: bash
         run: |
           # git tag
+          chmod +x ./check-version.sh
           ./check-version.sh
       - name: Create and push tags
         shell: bash
         run: |
+          chmod +x ./create-push-tags.sh
           ./create-push-tags.sh
