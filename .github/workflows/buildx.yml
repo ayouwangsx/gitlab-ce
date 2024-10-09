@@ -71,7 +71,7 @@ jobs:
           # 根据架构修改 setup 脚本
           #echo 'sed -i "s\# ignore-warnings ARM64-COW-BUG\ignore-warnings ARM64-COW-BUG\g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' >> ./${{ env.DOCKER_DIR }}/assets/setup
           #echo 'sed -i "s\# ignore-warnings AMD64-COW-BUG\ignore-warnings AMD64-COW-BUG\g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' >> ./${{ env.DOCKER_DIR }}/assets/setup
-          sed -i '/Patch omnibus package/a [ "$(uname -m)" == "arm"* ] || [ "$(uname -m)" == "aarch64" ] && sed -i "s#ignore-warnings AMD64-COW-BUG#ignore-warnings AMD64-COW-BUG#g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' ./${{ env.DOCKER_DIR }}/assets/setup
+          sed -i '/Patch omnibus package/a [ "$(uname -m)" == "arm"* ] || [ "$(uname -m)" == "aarch64" ] && sed -i "s\# ignore-warnings ARM64-COW-BUG\ignore-warnings ARM64-COW-BUG\g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' ./${{ env.DOCKER_DIR }}/assets/setup
 
       - name: Build and Push Multi-Arch Image
         uses: docker/build-push-action@v6
