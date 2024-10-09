@@ -73,7 +73,9 @@ jobs:
           #echo 'sed -i "s\# ignore-warnings AMD64-COW-BUG\ignore-warnings AMD64-COW-BUG\g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' >> ./${{ env.DOCKER_DIR }}/assets/setup
           sed -i '/Patch omnibus package/a [ "$(uname -m)" == "arm"* ] || [ "$(uname -m)" == "aarch64" ] && sed -i "s8# ignore-warnings ARM64-COW-BUG8ignore-warnings ARM64-COW-BUG8g" /opt/gitlab/embedded/cookbooks/redis/templates/default/redis.conf.erb' ./${{ env.DOCKER_DIR }}/assets/setup
           sed -i '/DOWNLOAD_URL_amd64/!{/unset DOWNLOAD_URL/i DOWNLOAD_URL_amd64\nDOWNLOAD_URL_arm64}' ./${{ env.DOCKER_DIR }}/assets/setup
-          grep -q 'export DOWNLOAD_URL' ./${{ env.DOCKER_DIR }}/assets/setup || sed '/Install GitLab/a [[ "${TARGETARCH}" == "amd64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_amd64} || [[ "${TARGETARCH}" == "arm64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_arm64} || echo "Unknown TARGETARCH: DOWNLOAD_URL not set"' ./${{ env.DOCKER_DIR }}/assets/setup
+        
+          #grep -q 'export DOWNLOAD_URL' ./${{ env.DOCKER_DIR }}/assets/setup || sed '/Install GitLab/a [[ "${TARGETARCH}" == "amd64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_amd64} || [[ "${TARGETARCH}" == "arm64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_arm64} || echo "Unknown TARGETARCH: DOWNLOAD_URL not set"' ./${{ env.DOCKER_DIR }}/assets/setup
+          grep -q 'export DOWNLOAD_URL' ./${{ env.DOCKER_DIR }}/assets/setup || sed -i '/Install GitLab/a [[ "${TARGETARCH}" == "amd64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_amd64} || [[ "${TARGETARCH}" == "arm64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_arm64} || echo "Unknown TARGETARCH: DOWNLOAD_URL not set"' ./${{ env.DOCKER_DIR }}/assets/setup
           #sed '/export DOWNLOAD_URL/!{/Install GitLab/a [[ "${TARGETARCH}" == "amd64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_amd64} || [[ "${TARGETARCH}" == "arm64" ]] && export DOWNLOAD_URL=${DOWNLOAD_URL_arm64} || echo "Unknown TARGETARCH: DOWNLOAD_URL not set"}' ./${{ env.DOCKER_DIR }}/assets/setup
 
       - name: Build and Push Multi-Arch Image
