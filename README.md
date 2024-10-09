@@ -1,5 +1,21 @@
 # gitlab-ce
 
+##  本项目由 [yrzr](https://github.com/yrzr/gitlab-ce-arm64v8-docker) 的项目 gitlab-ce-arm64v8-docker 改进完善而来
+
+## 本项目同时构建arm和amd镜像
+可以使用 `--platform` 参数指定cpu架构拉取镜像
+```bash
+# AMD64
+docker pull --platform=amd64 iabsdocker/gitlab-ce:latest
+
+# ARM64
+docker pull --platform=arm64 iabsdocker/gitlab-ce:latest
+```
+或者根据宿主机cpu架构自动拉取合适的镜像
+```bash
+docker pull iabsdocker/gitlab-ce:latest
+```
+
 兼容 **ARM64** 和 **AMD64** 架构。
 
 GitHub 地址：[https://github.com/ayouwangsx/gitlab-ce](https://github.com/ayouwangsx/gitlab-ce)
