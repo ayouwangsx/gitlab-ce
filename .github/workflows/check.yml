@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - mainn
   schedule:
-    - cron: "*/20 * * * *"
+    # - cron: "*/20 * * * *"
+    - cron: "0 0 * * *"
 
 jobs:
   check:
