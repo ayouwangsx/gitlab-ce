@@ -26,7 +26,10 @@ jobs:
         with:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      
+
+      - name: Install Dependencies
+        run: |
+          apt-get install -y libatomic1 && apt-get clean && rm -rf /var/lib/apt/lists/*
       - name: Set variables
         shell: bash
         run: |
