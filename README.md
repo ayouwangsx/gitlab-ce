@@ -1,6 +1,6 @@
 # gitlab-ce
 
-Compatible with **arm64v8** architecture.
+兼容 **ARM64** 和 **AMD64** 架构。
 
 GitHub 地址：[https://github.com/yrzr/gitlab-ce-arm64v8-docker](https://github.com/ayouwangsx/gitlab-ce)
 
