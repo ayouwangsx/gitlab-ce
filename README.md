@@ -2,9 +2,9 @@
 
 兼容 **ARM64** 和 **AMD64** 架构。
 
-GitHub 地址：[https://github.com/yrzr/gitlab-ce-arm64v8-docker](https://github.com/ayouwangsx/gitlab-ce)
+GitHub 地址：[https://github.com/ayouwangsx/gitlab-ce](https://github.com/ayouwangsx/gitlab-ce)
 
-Docker 镜像地址：[https://hub.docker.com/r/yrzr/gitlab-ce-arm64v8](https://hub.docker.com/r/iabsdocker/gitlab-ce)
+Docker 镜像地址：[https://hub.docker.com/r/iabsdocker/gitlab-ce](https://hub.docker.com/r/iabsdocker/gitlab-ce)
 
 Blog：https://blog.ayou.ink
 
