@@ -66,6 +66,7 @@ jobs:
           uname -m
           # 根据平台设置下载 URL
           #echo "DOWNLOAD_URL=https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/jammy/gitlab-ce_${{ github.ref_name }}_arm64.deb/download.deb" >> ./${{ env.DOCKER_DIR }}/RELEASE
+          sed -i 's/SHELL \[\"\/bin\/sh\", \"-c\"\],/SHELL \[\"\/bin\/sh\", \"-c\"\]/' ./${{ env.DOCKER_DIR }}/Dockerfile
           sed -i '/Install required packages/a RUN apt-get update -q && apt-get install -y libatomic1' ./${{ env.DOCKER_DIR }}/Dockerfile
           #echo "sudo apt-get install -y libatomic1 && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*" >> ./${{ env.DOCKER_DIR }}/RELEASE
           echo 'ARCH=$(uname -m) && if [[ "${ARCH}" == "x86_64" ]]; then DOWNLOAD_URL="https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/jammy/gitlab-ce_${{ github.ref_name }}_amd64.deb/download.deb"; elif [[ "${ARCH}" == "aarch64" ]]; then DOWNLOAD_URL="https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/jammy/gitlab-ce_${{ github.ref_name }}_arm64.deb/download.deb"; else echo "Unknown architecture" && exit 1; fi' >> ./${{ env.DOCKER_DIR }}/RELEASE
