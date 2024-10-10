@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - mainn
-  schedule:
+  #schedule:
     # - cron: "*/20 * * * *"
-    - cron: "0 0 * * *"
+    #- cron: "0 0 * * *"
 
 jobs:
   check:
